@@ -57,7 +57,7 @@ What is the solution to your new captcha?
 answer = 0
 
 for i, nr in enumerate(input):
-    ix = (i+len(input)/2)%len(input)
+    ix = (i+len(input)//2)%len(input)
     answer += int(nr) if nr == input[ix] else 0
     
 print(answer)
