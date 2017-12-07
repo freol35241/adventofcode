@@ -1319,3 +1319,32 @@ As you can see, tknk's disc is unbalanced: ugml's stack is heavier than the othe
 Given that exactly one program is the wrong weight, what would its weight need to be to balance the entire tower?
 
 """
+
+start = program
+
+programs = raw_input.split('\n')
+
+program_dict = {}
+
+for program in programs:
+    splt = program.split(' ')
+    name = splt[0]
+    weight = splt[1].replace('(','').replace(')','')
+
+    subs = []
+    if '->' in program:
+        ix = splt.index('->')
+        subs = [sub.replace(',','') for sub in splt[ix+1:]]
+
+    program_dict[name] = {'w': int(weight),
+                          'subs': subs}
+
+
+
+def calculate_weights(name):
+    for sub in program_dict[name][subs]:
+        
+
+def find_unbalanced(start):
+    subs = program_dict[]
+    
