@@ -1291,6 +1291,7 @@ fmpvv (74)
 bcadp (91)
 tmzxl (23)"""
 
+
 programs = [line.split(' ')[0] for line in raw_input.split('\n')]
 
 for program in programs:
@@ -1339,12 +1340,29 @@ for program in programs:
     program_dict[name] = {'w': int(weight),
                           'subs': subs}
 
-
+def find_correct_weight(subs, weights):
+    un= np.unique(weights)
+    # weights will contain exactly two (2) unique values
+    if weights.count(un[0]) == 1:
+        diff = un[0] - un[1]
+        ix = weights.index(un[0])
+    else:
+        diff = un[1] - un[0]
+        ix = weights.index(un[1])
+        
+    w = program_dict[subs[ix]]['w']
+    print(w-diff)
 
 def calculate_weights(name):
-    for sub in program_dict[name][subs]:
+    sub_weights = []
+    subs = program_dict[name]['subs']
+    for sub in subs:
+        sub_weights.append(calculate_weights(sub))
+    
+    if not sub_weights[1:] == sub_weights[:-1]:
+        find_correct_weight(subs, sub_weights)
+        
+    return program_dict[name]['w'] + sum(sub_weights)
         
 
-def find_unbalanced(start):
-    subs = program_dict[]
-    
+calculate_weights(start)
